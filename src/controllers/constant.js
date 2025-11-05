@@ -649,7 +649,14 @@ function sheetconfigHTML(){
     const config = customSheetRightClickConfig();
 
     /* 如果配置项全部为flase，则隐藏入口且不再菜单项 */
-    if(Object.values(config).every(ele=> !ele)){
+    // if(Object.values(config).every(ele=> !ele)){
+    //     $('#luckysheet-sheet-container-c').addClass("luckysheet-sheet-container-menu-hide");
+    //     return "";
+    // }
+
+    // 兼容处理
+    const configValues = Object.keys(config).map(key => config[key]);
+    if(configValues.every(ele=> !ele)){
         $('#luckysheet-sheet-container-c').addClass("luckysheet-sheet-container-menu-hide");
         return "";
     }

@@ -58,7 +58,7 @@ const babelConfig = {
             useBuiltIns: 'usage',
             corejs: 3,
             targets: {
-                chrome: 58,
+                chrome: 49,
                 ie: 11
             }
         }]

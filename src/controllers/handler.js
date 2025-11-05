@@ -5291,8 +5291,11 @@ export default function luckysheetHandler() {
                 //剪贴板内容解析
                 let cpDataArr = [];
                 
-                let reg = new RegExp('<tr.*?>(.*?)</tr>', 'gs');
-                let reg2 = new RegExp('<td.*?>(.*?)</td>', 'gs');
+                // let reg = new RegExp('<tr.*?>(.*?)</tr>', 'gs');
+                // let reg2 = new RegExp('<td.*?>(.*?)</td>', 'gs');
+                // 兼容修改
+                let reg = new RegExp('<tr[\\s\\S]*?>([\\s\\S]*?)</tr>', 'g');
+                let reg2 = new RegExp('<td[\\s\\S]*?>([\\s\\S]*?)</td>', 'g')
 
                 let regArr = txtdata.match(reg) || [];
 
@@ -5303,7 +5306,9 @@ export default function luckysheetHandler() {
 
                     if (reg2Arr != null) {
                         for (let j = 0; j < reg2Arr.length; j++) {
-                            let cpValue = reg2Arr[j].replace(/<td.*?>/gs, "").replace(/<\/td>/gs, "");
+                            // let cpValue = reg2Arr[j].replace(/<td.*?>/gs, "").replace(/<\/td>/gs, "");
+                            // 兼容处理
+                            let cpValue = reg2Arr[j].replace(/<td[\\s\\S]*?>|<\/td>/g, "")
                             cpRowArr.push(cpValue);
                         }
                     }
