@@ -9222,6 +9222,8 @@ export default {
         borderInside:'borderInside',
         borderHorizontal:'borderHorizontal',
         borderVertical:'borderVertical',
+        borderDiagonalDown:'Diagonal down',
+        borderDiagonalUp:'Diagonal up',
         borderColor:'borderColor',
         borderSize:'borderSize',
     },

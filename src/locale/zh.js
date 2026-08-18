@@ -9449,6 +9449,8 @@ export default {
         borderInside:'内侧',
         borderHorizontal:'内侧横线',
         borderVertical:'内侧竖线',
+        borderDiagonalDown:'左上至右下对角线',
+        borderDiagonalUp:'左下至右上对角线',
         borderColor:'边框颜色',
         borderSize:'边框粗细'
     },

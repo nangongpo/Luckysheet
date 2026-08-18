@@ -807,6 +807,20 @@ function getBorderInfoComputeRange(dataset_row_st,dataset_row_ed,dataset_col_st,
                             }
                         }
                     }
+                    else if(borderType == "border-diagonal-down" || borderType == "border-diagonal-up"){
+                        for(let bd_r = bd_r1; bd_r <= bd_r2; bd_r++){
+                            if (cfg["rowhidden"] != null && cfg["rowhidden"][bd_r] != null) continue;
+                            for(let bd_c = bd_c1; bd_c <= bd_c2; bd_c++){
+                                if(borderInfoCompute[bd_r + "_" + bd_c] == null) borderInfoCompute[bd_r + "_" + bd_c] = {};
+                                let diagonal = borderInfoCompute[bd_r + "_" + bd_c].d || {};
+                                diagonal.color = borderColor;
+                                diagonal.style = borderStyle;
+                                diagonal.diagonalUp = borderType == "border-diagonal-up" || diagonal.diagonalUp === true;
+                                diagonal.diagonalDown = borderType == "border-diagonal-down" || diagonal.diagonalDown === true;
+                                borderInfoCompute[bd_r + "_" + bd_c].d = diagonal;
+                            }
+                        }
+                    }
                     else if(borderType == "border-none"){
                         for(let bd_r = bd_r1; bd_r <= bd_r2; bd_r++){
                             if (cfg["rowhidden"] != null && cfg["rowhidden"][bd_r] != null) {
@@ -867,9 +881,18 @@ function getBorderInfoComputeRange(dataset_row_st,dataset_row_ed,dataset_col_st,
                     continue;
                 }
 
-                if(value.l != null || value.r != null || value.t != null || value.b != null){
+                if(value.l != null || value.r != null || value.t != null || value.b != null || value.d != null){
                     if(borderInfoCompute[bd_r + "_" + bd_c] == null){
                         borderInfoCompute[bd_r + "_" + bd_c] = {};
+                    }
+
+                    if(value.d != null){
+                        borderInfoCompute[bd_r + "_" + bd_c].d = {
+                            "color": value.d.color,
+                            "style": value.d.style,
+                            "diagonalUp": value.d.diagonalUp === true,
+                            "diagonalDown": value.d.diagonalDown === true
+                        };
                     }
 
                     if(data[bd_r] != null && getObjType(data[bd_r][bd_c]) == "object" && data[bd_r][bd_c].mc != null){

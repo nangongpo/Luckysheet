@@ -1056,6 +1056,8 @@ const menuButton = {
                     {"text": locale_border.borderInside, "value": "border-inside", "example": '<div class="luckysheet-icon luckysheet-inline-block luckysheet-material-icon luckysheet-mousedown-cancel" style="user-select: none;opacity:1;"> <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-border-inside iconfont luckysheet-iconfont-neikuangxian" style="user-select: none;"> </div> </div>'},
                     {"text": locale_border.borderHorizontal, "value": "border-horizontal", "example": '<div class="luckysheet-icon luckysheet-inline-block luckysheet-material-icon luckysheet-mousedown-cancel" style="user-select: none;opacity:1;"> <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-border-horizontal iconfont luckysheet-iconfont-neikuanghengxian" style="user-select: none;"> </div> </div>'},
                     {"text": locale_border.borderVertical, "value": "border-vertical", "example": '<div class="luckysheet-icon luckysheet-inline-block luckysheet-material-icon luckysheet-mousedown-cancel" style="user-select: none;opacity:1;"> <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-border-vertical iconfont luckysheet-iconfont-neikuangshuxian" style="user-select: none;"> </div> </div>'},
+                    {"text": locale_border.borderDiagonalDown, "value": "border-diagonal-down", "example": '<span style="font-size:18px;">↘</span>'},
+                    {"text": locale_border.borderDiagonalUp, "value": "border-diagonal-up", "example": '<span style="font-size:18px;">↗</span>'},
                     {"text": "", "value": "split", "example": ""},
                     {"text": "<span id='luckysheet-icon-borderColor-linecolor' class='luckysheet-mousedown-cancel' style='border-bottom:3px solid #000;'>"+ locale_border.borderColor +"</span>", "value":"borderColor", "example":"more"},
                     {"text": ""+ locale_border.borderSize +"<img id='luckysheetborderSizepreview' width=100 height=10 src='data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==' style='position:absolute;bottom:-5px;right:0px;width:100px;height:10px;'>", "value":"borderSize", "example":"more"}
@@ -1201,7 +1203,7 @@ const menuButton = {
                     let $icon = $("#luckysheet-icon-border-all").find(".luckysheet-icon-img-container");
 
                     // add iconfont
-                    $icon.removeAttr("class").addClass("luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-" + itemvalue + iconfontObject[itemvalue]);
+                    $icon.removeAttr("class").addClass("luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-" + itemvalue + (iconfontObject[itemvalue] || ""));
 
                     _this.focus($menuButton, itemvalue);
                 });

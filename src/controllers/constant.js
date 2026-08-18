@@ -1064,6 +1064,8 @@ const iconfontObjects = {
         'border-inside': ' iconfont luckysheet-iconfont-neikuangxian',
         'border-horizontal': ' iconfont luckysheet-iconfont-neikuanghengxian',
         'border-vertical': ' iconfont luckysheet-iconfont-neikuangshuxian',
+        'border-diagonal-down': '',
+        'border-diagonal-up': '',
     },
     align:{
         'left': ' iconfont luckysheet-iconfont-wenbenzuoduiqi',

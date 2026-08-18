@@ -652,6 +652,14 @@ function luckysheetDrawMain(scrollWidth, scrollHeight, drawWidth, drawHeight, of
                                 margeMain.end_c += (end_c - start_c);
                                 margeMain.firstcolumnlen += firstcolumnlen;
                             }
+
+                            // 对角线记录在合并区域左上角单元格上，边框绘制也必须使用
+                            // 合并区域的完整坐标，而不能只使用左上角单元格的坐标。
+                            let mergeBorderOffset = borderOffset[margeMain.r + "_" + margeMain.c];
+                            if(mergeBorderOffset != null){
+                                mergeBorderOffset.end_r = margeMain.end_r;
+                                mergeBorderOffset.end_c = margeMain.end_c;
+                            }
                         }
 
                         continue;
@@ -1011,6 +1019,26 @@ function luckysheetDrawMain(scrollWidth, scrollHeight, drawWidth, drawHeight, of
             canvas.restore();
         }
 
+        let borderDiagonalRender = function(border, start_r, start_c, end_r, end_c, offsetLeft, offsetTop, canvas){
+            if(border == null) return;
+            let left = start_c - 2 + bodrder05 + offsetLeft;
+            let right = end_c - 2 + bodrder05 + offsetLeft;
+            let top = start_r + offsetTop - 1;
+            let bottom = end_r - 2 + bodrder05 + offsetTop;
+            canvas.save();
+            canvas.strokeStyle = border.color;
+            if(border.diagonalDown === true){
+                menuButton.setLineDash(canvas, border.style, "h", left, top, right, bottom);
+                canvas.beginPath(); canvas.moveTo(left, top); canvas.lineTo(right, bottom); canvas.stroke();
+            }
+            if(border.diagonalUp === true){
+                menuButton.setLineDash(canvas, border.style, "h", right, top, left, bottom);
+                canvas.beginPath(); canvas.moveTo(right, top); canvas.lineTo(left, bottom); canvas.stroke();
+            }
+            canvas.closePath();
+            canvas.restore();
+        }
+
         let borderInfoCompute = getBorderInfoComputeRange(dataset_row_st,dataset_row_ed,dataset_col_st,dataset_col_ed);
         
         for(let x in borderInfoCompute){
@@ -1050,6 +1078,7 @@ function luckysheetDrawMain(scrollWidth, scrollHeight, drawWidth, drawHeight, of
                 if(borderBottom != null){
                     borderBottomRender(borderBottom.style, borderBottom.color, start_r, start_c, end_r, end_c, offsetLeft, offsetTop, luckysheetTableContent);
                 }
+                borderDiagonalRender(borderInfoCompute[x].d, start_r, start_c, end_r, end_c, offsetLeft, offsetTop, luckysheetTableContent);
             }
         }
     }

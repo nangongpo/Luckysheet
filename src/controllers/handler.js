@@ -3984,7 +3984,8 @@ export default function luckysheetHandler() {
                                 "l": borderInfoCompute[(r + last["row"][0]) + "_" + (c + last["column"][0])].l,
                                 "r": borderInfoCompute[(r + last["row"][0]) + "_" + (c + last["column"][0])].r,
                                 "t": borderInfoCompute[(r + last["row"][0]) + "_" + (c + last["column"][0])].t,
-                                "b": borderInfoCompute[(r + last["row"][0]) + "_" + (c + last["column"][0])].b
+                                "b": borderInfoCompute[(r + last["row"][0]) + "_" + (c + last["column"][0])].b,
+                                "d": borderInfoCompute[(r + last["row"][0]) + "_" + (c + last["column"][0])].d
                             }
                         }
 
